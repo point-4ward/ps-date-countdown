@@ -1,3 +1,5 @@
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
+
 # Date Countdown
 A python script for Homeassistant that counts down the days to birthdays, anniversaries etc
 
@@ -5,6 +7,9 @@ A python script for Homeassistant that counts down the days to birthdays, annive
 This script creates a sensor that a counts down to the next occurrance of a date, like a birthday or anniversary and gives the number of years as an attribute
 
 Requires python_script: to be enabled in you configuration
+
+## Installation
+Copy the Python script in to your `/config/python_scripts` directory or install via HACS.
 
 ## Script arguments
 key | required | type | description
