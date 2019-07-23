@@ -1,8 +1,6 @@
 ## How it works
 This script creates a sensor that a counts down to the next occurrance of a date, like a birthday or anniversary and gives the number of years as an attribute
 
-Requires python_script: to be enabled in you configuration
-
 ## Script arguments
 key | required | type | description
 -- | -- | -- | --
@@ -13,32 +11,41 @@ key | required | type | description
 ## Usage
 Each sensor **requires**:
 
+```
 name: NAME_OF_DATE
 type: TYPE_OF_DATE
 date: DD/MM/YYYY_OF DATE
+```
 
 examples:
 
+```
 name: John
 type: birthday
 date: 17/08/1971
+```
 
 or
 
+```
 name: Our wedding
 type: anniversary
 date: 14/02/1994
+```
 
 ## Generated sensors
 Each sensor is given the following automatically:
 
+```
 entity_id: sensor.<type>_<name>
 friendly_name: <name> 's <type>
 state: <Days to the date from today>
 years: <Number of years it will be>
+```
 
 So, the two sensors we created above would come out as:
 
+```
 sensor.birthday_john
 friendly_name: John’s birthday
 state: However many days it is until 17th August
@@ -48,6 +55,7 @@ sensor.anniversary_our_wedding
 friendly_name: Our wedding anniversary
 state: However many days to 14th February
 years: How many years you will have been married on that day
+```
 
 ## Example configuration.yaml entry
 An example automation to create and refresh the above two sensors daily would be:
