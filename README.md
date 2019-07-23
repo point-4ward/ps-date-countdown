@@ -8,7 +8,7 @@ Requires python_script: to be enabled in you configuration
 
 ## Script arguments
 key | required | type | description
--- | -- | -- | -- | --
+-- | -- | -- | --
 `name:` | True | string | Name of the date (eg. John)
 `type:` | True | string | Type of date (eg. Birthday)
 `date:` | True | string | Date, in format DD/MM/YYYY
