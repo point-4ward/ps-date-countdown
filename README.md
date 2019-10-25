@@ -120,7 +120,7 @@ show_header_toggle: false
 title: Our Events
 entities:
   - entity: sensor.anniversary_our_wedding
-    secondary_info: ' [[ {entity}.attributes.nextoccur ]]  ( [[ {entity}.attributes.years ]] Years )'
+    secondary_info: '[[ {entity}.attributes.nextoccur ]]  ( [[ {entity}.attributes.years ]] Years )'
     type: 'custom:secondaryinfo-entity-row'
 ```
 
