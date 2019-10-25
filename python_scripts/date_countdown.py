@@ -10,7 +10,7 @@ dateSplit = dateStr.split("/")
 dateDay = int(dateSplit[0])
 dateMonth = int(dateSplit[1])
 dateYear =  int(dateSplit[2])
-date = datetime.date(dateYear,dateMonth,dateDay)
+date = datetime.date(dateYear , dateMonth , dateDay)
 
 thisYear = today.year
 nextOccur = datetime.date(thisYear , dateMonth , dateDay)
@@ -24,13 +24,14 @@ if today < nextOccur:
 elif today > nextOccur:
   nextOccur = datetime.date(thisYear+1 , dateMonth , dateDay)
   numberOfDays = (nextOccur - today).days
-  years = years+1
+  years = years + 1
 
 hass.states.set(sensorName , numberOfDays ,
   {
     "icon" : "mdi:calendar-star" ,
     "unit_of_measurement" : "days" ,
-    "friendly_name" : "{}'s {}".format(name, type) ,
+    "friendly_name" : "{}'s {}".format(name , type) ,
+    "nextoccur" : "{}/{}/{}".format(nextOccur.day , nextOccur.month , nextOccur.year) ,
     "years" : years
   }
 )
