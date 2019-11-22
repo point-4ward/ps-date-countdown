@@ -22,9 +22,14 @@ if today < nextOccur:
   numberOfDays = (nextOccur - today).days
 
 elif today > nextOccur:
-  nextOccur = datetime.date(thisYear+1 , dateMonth , dateDay)
-  numberOfDays = (nextOccur - today).days
-  years = years + 1
+  if thisYear > dateYear + 1:
+    nextOccur = datetime.date(thisYear + 1 , dateMonth , dateDay)
+    numberOfDays = (nextOccur - today).days
+    years = years + 1
+  else:
+    nextOccur = datetime.date(dateYear , dateMonth , dateDay)
+    numberOfDays = (nextOccur - today).days
+    years = years + 1
 
 hass.states.set(sensorName , numberOfDays ,
   {
