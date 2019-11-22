@@ -132,4 +132,7 @@ Will provide the following lovelace representation:
 
 ![Lovelace example](https://community-home-assistant-assets.s3.dualstack.us-west-2.amazonaws.com/original/3X/b/a/ba44600d7f41b1525a3c835d11bcc3bd59815b23.png)
 
-(Thanks to [@myle](https://community.home-assistant.io/u/myle/summary) for this idea )
+## Credits
+Thanks to [@myle](https://community.home-assistant.io/u/myle/summary) for the idea for the extra attributes and the lovelace presentation.
+
+Thanks to [AJax2012](https://github.com/AJax2012) for the PR that caters for future dates, and makes the apostrophes in the friendly names only append to borthday sensors.
