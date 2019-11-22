@@ -31,11 +31,18 @@ elif today > nextOccur:
     numberOfDays = (nextOccur - today).days
     years = years + 1
 
+friendly_name = ''
+
+if type.lower() == 'birthday':
+  friendly_name = "{}'s {}".format(name , type)
+else:
+  friendly_name = "{} {}".format(name , type)
+
 hass.states.set(sensorName , numberOfDays ,
   {
     "icon" : "mdi:calendar-star" ,
     "unit_of_measurement" : "days" ,
-    "friendly_name" : "{}'s {}".format(name , type) ,
+    "friendly_name" : friendly_name,
     "nextoccur" : "{}/{}/{}".format(nextOccur.day , nextOccur.month , nextOccur.year) ,
     "years" : years
   }
