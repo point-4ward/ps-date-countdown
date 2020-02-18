@@ -17,6 +17,8 @@ key | required | type | description
 `name:` | True | string | Name of the date (eg. John)
 `type:` | True | string | Type of date (eg. Birthday)
 `date:` | True | string | Date, in format DD/MM/YYYY
+`friendly_name:` | False | string | Display name of the sensor
+`icon:` | False | string | Icon of the sensor, defaults to 'mdi:calendar-star'
 
 The date can be in the future if you want to countdown to the date itself, and then the anniversaries thereafter.
 
@@ -27,6 +29,13 @@ Each sensor **requires**:
 name: NAME_OF_DATE
 type: TYPE_OF_DATE
 date: DD/MM/YYYY_OF DATE
+```
+
+You can also customize the sensor icon and friendly names :
+
+```
+icon: "mdi:ICON_OF_DATE"
+friendly_name: FRIENDLY_NAME_OF_DATE
 ```
 
 examples:
@@ -43,6 +52,7 @@ or
 name: Our wedding
 type: anniversary
 date: 14/02/1994
+icon: "mdi:ring"
 ```
 
 ## Generated sensors
@@ -96,6 +106,7 @@ automation:
           name: Our wedding
           type: anniversary
           date: 14/02/1994
+          icon: "mdi:ring"
 ```
 
 ## Example automation
