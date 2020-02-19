@@ -1,7 +1,7 @@
 ## How it works
 This script creates a sensor that a counts down to the next occurrance of a date, like a birthday or anniversary and gives the number of years as an attribute
 
-Requires `python_script:` to be enabled in you configuration
+Requires `python_script:` to be enabled in your configuration
 
 ## Installation
 Copy the Python script in to your `/config/python_scripts` directory or install via HACS.
@@ -12,6 +12,8 @@ key | required | type | description
 `name:` | True | string | Name of the date (eg. John)
 `type:` | True | string | Type of date (eg. Birthday)
 `date:` | True | string | Date, in format DD/MM/YYYY
+`friendly_name:` | False | string | Display name of the sensor
+`icon:` | False | string | Icon of the sensor, defaults to 'mdi:calendar-star'
 
 The date can be in the future if you want to countdown to the date itself, and then the anniversaries thereafter.
 
@@ -22,6 +24,13 @@ Each sensor **requires**:
 name: NAME_OF_DATE
 type: TYPE_OF_DATE
 date: DD/MM/YYYY_OF DATE
+```
+
+You can also customize the sensor icon and friendly names :
+
+```
+icon: "mdi:ICON_OF_DATE"
+friendly_name: FRIENDLY_NAME_OF_DATE
 ```
 
 examples:
@@ -38,6 +47,7 @@ or
 name: Our wedding
 type: anniversary
 date: 14/02/1994
+icon: "mdi:ring"
 ```
 
 ## Generated sensors
@@ -91,6 +101,7 @@ automation:
           name: Our wedding
           type: anniversary
           date: 14/02/1994
+          icon: "mdi:ring"
 ```
 
 ## Example automation
