@@ -12,25 +12,27 @@ dateMonth = int(dateSplit[1])
 dateYear =  int(dateSplit[2])
 date = datetime.date(dateYear , dateMonth , dateDay)
 
-thisYear = int(today.year)
-nextOccur = datetime.date(thisYear , dateMonth , dateDay)
+nextOccurYear = int(today.year)
+nextOccur = datetime.date(nextOccurYear , dateMonth , dateDay)
+
+if nextOccur < date:
+  # date must be the first occurrence
+  nextOccur = date
+
+if nextOccur < today:
+  # if event has passed this year, nextOccur is next year
+  nextOccurYear = nextOccurYear + 1
+  nextOccur = datetime.date(nextOccurYear, dateMonth, dateDay)
 
 numberOfDays = 0
-years = dateYear - thisYear
+years = nextOccurYear - dateYear
 
-# if the year is "next year" or further
-if years > 0:
-  nextOccur = datetime.date(dateYear , dateMonth , dateDay)
-  numberOfDays = (nextOccur - today).days
-else:
-  
-  numberOfDays = (nextOccur - today).days
-  # if event has passed this year
-  if numberOfDays < 0:
-    nextYear = thisYear + 1
-    nextOccur = datetime.date(nextYear , dateMonth , dateDay)
-    numberOfDays = (nextOccur - today).days
-    years = years + 1
+if years < 0:
+  # if years is negative, then date is more than 365 days away
+  # nextOccur will be the first occurrence
+  years = 0
+
+numberOfDays = (nextOccur - today).days
 
 defaultFriendlyName = ''
 
