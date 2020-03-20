@@ -2,7 +2,7 @@ today = datetime.datetime.now().date()
 
 name = data.get('name')
 eventType = data.get('type')
-sensorName = "sensor.{}_{}".format(type , name.replace(" " , "_"))
+sensorName = "sensor.{}_{}".format(eventType , name.replace(" " , "_"))
 
 dateStr = data.get('date')
 dateSplit = dateStr.split("/")
