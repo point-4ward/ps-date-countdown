@@ -107,7 +107,7 @@ years: How many years SINCE you quit smoking
 Note that if the type is 'birthday' the sensor will automatically add an apostrophe.
 
 ## Example configuration.yaml entry
-An example automation to create and refresh the above two sensors daily would be:
+An example automation to create and refresh the above three sensors daily would be:
 
 ```yaml
 automation:
