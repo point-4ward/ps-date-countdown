@@ -11,9 +11,10 @@
 today = datetime.datetime.now().date()
 name = data.get('name')
 eventType = data.get('type')
+countup = data.get('reverse' , False)
 defaultFriendlyName = ''
 numberOfDays = 0
-
+defaultIcon = "mdi:calendar-star"
 
 # Convert the date we got
 dateStr = data.get('date')
@@ -29,52 +30,70 @@ date = datetime.date(dateYear , dateMonth , dateDay)
 nextOccurYear = int(today.year)
 nextOccur = datetime.date(nextOccurYear , dateMonth , dateDay)
 
-if nextOccur < date:
-  # date must be the first occurrence
-  nextOccur = date
+# If countup (reverse == true)
+if countup:
+    defaultIcon = "mdi:calendar-arrow-right"
+    years = today.year - date.year
 
-if nextOccur < today:
-  # if event has passed this year, nextOccur is next year
-  nextOccurYear = nextOccurYear + 1
-  nextOccur = datetime.date(nextOccurYear, dateMonth, dateDay)
+    if nextOccur < today:
+    #if event has passed this year, get days between then and today
+        numberOfDays = (today - nextOccur).days
 
-years = nextOccurYear - dateYear
+    else:
+    # Count days from last year
+        lastYearDate = datetime.date(today.year - 1 , dateMonth, dateDay)
+        numberOfDays = (today - lastYearDate).days
 
-if years < 0:
-  # if years is negative, then date is more than 365 days away
-  # nextOccur will be the first occurrence
-  years = 0
 
-numberOfDays = (nextOccur - today).days
+# Regular countdown
+else:
+    if nextOccur < date:
+        # date must be the first occurrence
+        nextOccur = date
+
+    if nextOccur < today:
+        # if event has passed this year, nextOccur is next year
+        nextOccurYear = nextOccurYear + 1
+        nextOccur = datetime.date(nextOccurYear, dateMonth, dateDay)
+
+    years = nextOccurYear - dateYear
+
+    if years < 0:
+      # if years is negative, then date is more than 365 days away
+      # nextOccur will be the first occurrence
+        years = 0
+
+    numberOfDays = (nextOccur - today).days
 
 
 # Set the default friendly name
 if eventType.lower() == 'birthday':
-  # add an apostophe for birthdays
-  defaultFriendlyName = "{}'s {}".format(name , eventType)
+    # add an apostophe for birthdays
+    defaultFriendlyName = "{}'s {}".format(name , eventType)
 else:
-  defaultFriendlyName = "{} {}".format(name , eventType)
+    defaultFriendlyName = "{} {}".format(name , eventType)
 
 
 # Sanitise the entity_id to meet the criteria by
 # replacing Scandanavian characters and spaces
-name1 = name.replace("Æ" , "AE")
-name2 = name1.replace("Ø" , "O")
-name3 = name2.replace("Å" , "AA")
-name4 = name3.replace("æ" , "ae")
-name5 = name4.replace("ø" , "o")
-name6 = name5.replace("å" , "aa")
-safeName = name6.replace(" " , "_")
-sensorName = "sensor.{}_{}".format(eventType , safeName)
+rawName = "{}_{}".format(eventType , name)
+rawName1 = rawName.replace("Æ" , "AE")
+rawName2 = rawName1.replace("Ø" , "O")
+rawName3 = rawName2.replace("Å" , "AA")
+rawName4 = rawName3.replace("æ" , "ae")
+rawName5 = rawName4.replace("ø" , "o")
+rawName6 = rawName5.replace("å" , "aa")
+safeName = rawName6.replace(" " , "_")
+sensorName = "sensor.{}".format(safeName)
 
 
 # Send the sensor to homeassistant
 hass.states.set(sensorName , numberOfDays ,
-  {
-    "icon" : data.get("icon", "mdi:calendar-star"),
-    "unit_of_measurement" : "days" ,
-    "friendly_name" : data.get('friendly_name', defaultFriendlyName),
-    "nextoccur" : "{}/{}/{}".format(nextOccur.day , nextOccur.month , nextOccur.year) ,
-    "years" : years
-  }
+    {
+        "icon" : data.get("icon", defaultIcon),
+        "unit_of_measurement" : "days" ,
+        "friendly_name" : data.get('friendly_name', defaultFriendlyName),
+        "nextoccur" : "{}/{}/{}".format(nextOccur.day , nextOccur.month , nextOccur.year) ,
+        "years" : years
+    }
 )

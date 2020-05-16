@@ -1,5 +1,7 @@
 ## How it works
-This script creates a sensor that a counts down to the next occurrance of a date, like a birthday or anniversary and gives the number of years as an attribute
+This script creates a sensor that a counts down to the next occurrence of a date, like a birthday or anniversary and gives the number of years as an attribute.
+
+You can optionally reverse the counter so it counts up from the last occurrence of a date, such as when you quit smoking. 
 
 Requires `python_script:` to be enabled in your configuration
 
@@ -14,6 +16,7 @@ key | required | type | description
 `date:` | True | string | Date, in format DD/MM/YYYY
 `friendly_name:` | False | string | Display name of the sensor
 `icon:` | False | string | Icon of the sensor, defaults to 'mdi:calendar-star'
+`reverse:` | False | boolean | Reverses the sensor to count up instead of down.  (Defaults to False)
 
 The date can be in the future if you want to countdown to the date itself, and then the anniversaries thereafter.
 
@@ -33,6 +36,12 @@ icon: "mdi:ICON_OF_DATE"
 friendly_name: FRIENDLY_NAME_OF_DATE
 ```
 
+And you can reverse the sensor so it counts up from a date:
+
+```
+reverse: True
+```
+
 examples:
 
 ```
@@ -50,6 +59,15 @@ date: 14/02/1994
 icon: "mdi:ring"
 ```
 
+or
+
+```
+name: Quit Smoking
+type: celebration
+date: 01/10/2008
+reverse: True
+```
+
 ## Generated sensors
 Each sensor is given the following automatically:
 
@@ -61,7 +79,7 @@ nextoccur: <Date of next occurance>
 years: <Number of years it will be>
 ```
 
-So, the two sensors we created above would come out as:
+So, the three sensors we created above would come out as:
 
 ```
 sensor.birthday_john
@@ -75,12 +93,18 @@ friendly_name: Our wedding anniversary
 state: However many days to 14th February
 nextoccur: 14/02/YYYY (either this year or next year as appropriate)
 years: How many years you will have been married on that day
+
+sensor.celebration_quit_smoking
+friendly_name: Quit smoking celebration
+state: However many days SINCE 1st October
+nextOccur: 01/10/YYYY (either this year or next year as appropriate)
+years: How many years SINCE you quit smoking
 ```
 
 Note that if the type is 'birthday' the sensor will automatically add an apostrophe.
 
 ## Example configuration.yaml entry
-An example automation to create and refresh the above two sensors daily would be:
+An example automation to create and refresh the above three sensors daily would be:
 
 ```yaml
 automation:
@@ -102,6 +126,12 @@ automation:
           type: anniversary
           date: 14/02/1994
           icon: "mdi:ring"
+      - service: python_script.date_countdown
+        data:
+          name: Quit smoking
+          type: celebration
+          date: 01/10/2008
+          reverse: True
 ```
 
 ## Example automation
