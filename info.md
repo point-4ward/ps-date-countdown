@@ -1,5 +1,7 @@
 ## How it works
-This script creates a sensor that a counts down to the next occurrance of a date, like a birthday or anniversary and gives the number of years as an attribute
+This script creates a sensor that a counts down to the next occurrence of a date, like a birthday or anniversary and gives the number of years as an attribute.
+
+You can optionally reverse the counter so it counts up from the last occurrence of a date, such as when you quit smoking. 
 
 Requires `python_script:` to be enabled in your configuration
 
@@ -102,7 +104,7 @@ years: How many years SINCE you quit smoking
 Note that if the type is 'birthday' the sensor will automatically add an apostrophe.
 
 ## Example configuration.yaml entry
-An example automation to create and refresh the above two sensors daily would be:
+An example automation to create and refresh the above three sensors daily would be:
 
 ```yaml
 automation:
