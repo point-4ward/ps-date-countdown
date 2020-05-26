@@ -20,6 +20,7 @@ key | required | type | description
 `type:` | True | string | Type of date (eg. Birthday)
 `date:` | True | string | Date, in format DD/MM/YYYY
 `friendly_name:` | False | string | Display name of the sensor
+`append_year:` | False | boolean | Appends the number of years to the friendly name
 `icon:` | False | string | Icon of the sensor, defaults to 'mdi:calendar-star'
 `reverse:` | False | boolean | Reverses the sensor to count up instead of down.  (Defaults to False)
 
@@ -39,6 +40,7 @@ You can also customize the sensor icon and friendly names :
 ```
 icon: "mdi:ICON_OF_DATE"
 friendly_name: FRIENDLY_NAME_OF_DATE
+append_year: True
 ```
 
 And you can reverse the sensor so it counts up from a date:
@@ -62,6 +64,7 @@ name: Our wedding
 type: anniversary
 date: 14/02/1994
 icon: "mdi:ring"
+append_year: True
 ```
 
 or
@@ -94,7 +97,7 @@ nextoccur: 17/08/YYYY (either this year or next year as appropriate)
 years: However old John will be on his next birthday
 
 sensor.anniversary_our_wedding
-friendly_name: Our wedding anniversary
+friendly_name: Our wedding anniversary (20)
 state: However many days to 14th February
 nextoccur: 14/02/YYYY (either this year or next year as appropriate)
 years: How many years you will have been married on that day
@@ -131,6 +134,7 @@ automation:
           type: anniversary
           date: 14/02/1994
           icon: "mdi:ring"
+          append_year: True
       - service: python_script.date_countdown
         data:
           name: Quit smoking
