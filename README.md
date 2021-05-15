@@ -3,6 +3,9 @@ A python script for Homeassistant that counts down the days to birthdays, annive
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
 
+## Important note
+I no longer use homeassistant so if this script stops being compatible with homeassistant that will be the end of the line. That said, it hasn't needed any maintenence in over a year and was working well so it will probably be fine to use for a long while yet.
+
 ## How it works
 This script creates a sensor that a counts down to the next occurrence of a date, like a birthday or anniversary and gives the number of years as an attribute.
 
